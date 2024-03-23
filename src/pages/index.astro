@@ -14,5 +14,33 @@ import Topbar from '../components/Topbar'
 	<body class="h-screen w-screen bg-gradient-to-l from-orange-500 to-amber-400 p-6">
 		<Topbar />
 		<MunicipalityTable />
+		<div>
+			<canvas id="myChart"></canvas>
+		  </div>
+		  
+		  <script>
+			import { Chart } from 'chart.js/auto';
+
+			const ctx = document.getElementById('myChart') as HTMLCanvasElement;
+		  
+			new Chart(ctx, {
+			  type: 'bar',
+			  data: {
+				labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+				datasets: [{
+				  label: '# of Votes',
+				  data: [12, 19, 3, 5, 2, 3],
+				  borderWidth: 1
+				}]
+			  },
+			  options: {
+				scales: {
+				  y: {
+					beginAtZero: true
+				  }
+				}
+			  }
+			});
+		  </script>
 	</body>
 </html>
