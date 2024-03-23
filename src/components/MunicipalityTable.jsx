@@ -1,6 +1,8 @@
-export default () => {
+import { cn } from '../lib/utils'
+
+export default ({ className = '' }) => {
     return (
-        <div className="p-6 bg-slate-200/30 rounded-3xl">
+        <div className={cn("p-6 bg-slate-200/30 rounded-3xl", className)}>
             <table className="table w-full text-sm text-left">
                 <thead className="text-xs bg-gray-50/30">
                     <th>Town</th>
