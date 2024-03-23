@@ -1,5 +1,6 @@
 ---
-
+import MunicipalityTable from '../components/MunicipalityTable'
+import Topbar from '../components/Topbar'
 ---
 
 <html lang="en">
@@ -10,6 +11,8 @@
 		<meta name="generator" content={Astro.generator} />
 		<title>NJ Shore Town Profiles</title>
 	</head>
-	<body class="h-screen w-screen bg-gradient-to-l from-orange-500 to-amber-400">
+	<body class="h-screen w-screen bg-gradient-to-l from-orange-500 to-amber-400 p-6">
+		<Topbar />
+		<MunicipalityTable />
 	</body>
 </html>
