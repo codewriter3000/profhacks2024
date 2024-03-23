@@ -1,0 +1,3 @@
+[submodule "src/profhacks2024-db"]
+	path = src/profhacks2024-db
+	url = https://github.com/codewriter3000/profhacks2024-db.git
