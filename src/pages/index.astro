@@ -1,6 +1,10 @@
 ---
 import MunicipalityTable from '../components/MunicipalityTable'
 import Topbar from '../components/Topbar'
+import { getCounties, getMunicipalities } from '../lib/utils'
+
+const counties = await getCounties()
+const municipalities = await getMunicipalities()
 ---
 
 <html lang="en">
@@ -12,7 +16,6 @@ import Topbar from '../components/Topbar'
 		<title>NJ Shore Town Profiles</title>
 	</head>
 	<body class="h-screen w-screen bg-gradient-to-l from-orange-500 to-amber-400 p-6">
-		<Topbar />
-		<MunicipalityTable />
+		<Topbar client:load counties={counties} municipalities={municipalities} />
 	</body>
 </html>

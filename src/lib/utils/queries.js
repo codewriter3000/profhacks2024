@@ -8,6 +8,26 @@ const db = await new sqlite3.Database('src/profhacks2024-db/db.sqlite', sqlite3.
     }
 })
 
-export const getCounties = async() => {
-    return await db.run('SELECT * FROM nj_counties;')
+export const getCounties = () => {
+    return new Promise((resolve, reject) => {
+        db.all('SELECT * FROM nj_counties;', (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(rows);
+        });
+    });
+};
+
+export const getMunicipalities = () => {
+    return new Promise((resolve, reject) => {
+        db.all('SELECT * FROM nj_municipalities;', (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(rows);
+        })
+    })
 }

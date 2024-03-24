@@ -1,4 +1,4 @@
 import cn from './cn.js'
-import { getCounties } from './queries.js'
+import { getCounties, getMunicipalities } from './queries.js'
 
-export { cn, getCounties }
+export { cn, getCounties, getMunicipalities }
