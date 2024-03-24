@@ -24,7 +24,12 @@ export const getCounties = () => processQuery('SELECT * FROM nj_counties;');
 
 export const getMunicipalities = () => processQuery('SELECT * FROM nj_municipalities;');
 
-export const getWaterQualityTestingInfo = () => processQuery('SELECT * FROM NJDEP_Beach_Data_2024_03_23;');
+export const getWaterQualityTestingInfo = () => {
+    let i = 1
+    return processQuery('SELECT * FROM NJDEP_Beach_Data_2024_03_23;').map(data => ({
+        ...data, primaryKey: i++
+    }))
+};
 
 export const getShoreTowns = () => processQuery('SELECT DISTINCT mun.* FROM nj_municipalities AS mun INNER JOIN NJDEP_Beach_Data_2024_03_23 AS beach ON mun.municipality_code = beach.municipality_code;');
 

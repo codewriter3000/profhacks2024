@@ -1,42 +1,62 @@
 ---
-import Profile from '../../components/Profile';
-import MyLine from '../../components/MyLine.tsx';
-import { getShoreTowns, getWaterQualityTestingInfoForCode } from '../../lib/utils';
+import Profile from "../../components/Profile";
+import {
+  getShoreTowns,
+  getWaterQualityTestingInfoForCode,
+} from "../../lib/utils";
 const { town } = Astro.params;
 
 export async function fetchDynamicData() {
-    const shoreTowns = await getShoreTowns()
-    return shoreTowns.map(shoreTown => ({
-        ...shoreTown,
-    }))
+  const shoreTowns = await getShoreTowns();
+  return shoreTowns.map((shoreTown) => ({
+    ...shoreTown,
+  }));
 }
 
 export async function getStaticPaths() {
-  // Fetch dynamic data or define possible values for dynamic parameter
   const dynamicData = await fetchDynamicData();
 
-  // Generate paths based on dynamic data
-  const paths = dynamicData.map(item => ({
-    params: { town: String(item.municipality_code) }
+  const paths = dynamicData.map((item) => ({
+    params: { town: String(item.municipality_code) },
   }));
 
-  return paths
+  return paths;
 }
 
-const waterQualityInfo = await getWaterQualityTestingInfoForCode(town)
+const waterQualityInfo = await getWaterQualityTestingInfoForCode(town);
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Profile</title>
-	</head>
-	<body class="h-screen w-screen bg-gradient-to-l from-amber-500 to-emerald-400 p-6">
+  <head>
+    <style>
+      body {
+        background: linear-gradient(-45deg, #ee7752, #e7c53c, #23a6d5, #23d5ab);
+        background-size: 400% 10000%;
+        animation: gradient 30s ease infinite;
+        height: 100vh;
+      }
+
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+    </style>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Profile</title>
+  </head>
+  <body class="h-screen w-screen p-8 overflow-x-hidden">
     <h1 class="text-3xl">{waterQualityInfo.municipality_name}</h1>
     <!-- <MyLine /> -->
-		<Profile waterQualityInfo={waterQualityInfo} />
-	</body>
+    <Profile client:load waterQualityInfo={waterQualityInfo} />
+  </body>
 </html>
