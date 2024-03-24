@@ -1,10 +1,10 @@
 ---
 //import Chart from '../components/Chart'
-=======
-import { getCounties, getMunicipalities } from '../lib/utils'
+import Topbar from '../components/Topbar'
+import { getShoreTowns, getShoreCounties } from '../lib/utils'
 
-const counties = await getCounties()
-const municipalities = await getMunicipalities()
+const shore_towns = await getShoreTowns()
+const shore_counties = await getShoreCounties()
 ---
 
 <html lang="en">
@@ -16,6 +16,6 @@ const municipalities = await getMunicipalities()
 		<title>NJ Shore Town Profiles</title>
 	</head>
 	<body class="h-screen w-screen bg-gradient-to-l from-orange-500 to-amber-400 p-6">
-		<Topbar client:load counties={counties} municipalities={municipalities} />
+		<Topbar client:load counties={shore_counties} municipalities={shore_towns} />
 	</body>
 </html>

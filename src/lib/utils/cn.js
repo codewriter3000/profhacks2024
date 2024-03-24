@@ -1,3 +1,1 @@
-export default (...classNames) => {
-    return classNames.join(' ')
-}
+export default (...classNames) => classNames.join(' ')

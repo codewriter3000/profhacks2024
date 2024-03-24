@@ -1,4 +1,5 @@
 import cn from './cn.js'
-import { getCounties, getMunicipalities } from './queries.js'
+import { getCounties, getMunicipalities, getWaterQualityTestingInfo, getShoreTowns, getShoreCounties, getMunicipalityCode, getWaterQualityTestingInfoForCode } from './queries.js'
+import toSlug from './toSlug.js'
 
-export { cn, getCounties, getMunicipalities }
+export { cn, toSlug, getCounties, getMunicipalities, getWaterQualityTestingInfo, getShoreTowns, getShoreCounties, getMunicipalityCode, getWaterQualityTestingInfoForCode }
