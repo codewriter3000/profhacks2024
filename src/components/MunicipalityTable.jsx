@@ -1,5 +1,6 @@
 import { useRef } from 'react'
-import { cn } from '../lib/utils'
+import { cn, getMunicipalityCode } from '../lib/utils'
+import { Link } from 'react-router-dom';
 
 export default ({ className = '', county, municipalities }) => {
 
@@ -15,12 +16,12 @@ export default ({ className = '', county, municipalities }) => {
                 <tbody>
                     {municipalities.map(muni => {
                         return (
-                            <tr className="bg-slate-100/30 border-b">
+                            <tr key={muni.municipality_code} className="bg-slate-100/30 border-b">
                                 <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
                                     {muni.municipality_name}
                                 </th>
                                 <th className="px-6 py-4">
-                                    <button>View</button>
+                                    <button><a href={`/profile/${muni.municipality_code}`}>View</a></button>
                                 </th>
                             </tr>
                         )

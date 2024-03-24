@@ -1,0 +1,1 @@
+export default (str) => str.toLowerCase().replace(/[\s_]/g, '-').replace(/[^\w-]/g, '')

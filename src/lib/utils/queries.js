@@ -67,3 +67,27 @@ export const getShoreCounties = () => {
         })
     })
 }
+
+export const getMunicipalityCode = (name) => {
+    return new Promise((resolve, reject) => {
+        db.all('SELECT * FROM nj_municipalities WHERE municipality_code = ?;', [name], (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(rows);
+        })
+    })
+}
+
+export const getWaterQualityTestingInfoForCode = (code) => {
+    return new Promise((resolve, reject) => {
+        db.all('SELECT * FROM NJDEP_Beach_Data_2024_03_23 WHERE municipality_code = ?;', [code], (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(rows);
+        })
+    })
+}
