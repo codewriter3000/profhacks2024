@@ -1,3 +1,5 @@
+//import Information from "../pages/profile/Information/information.astro"
+
 export default () => {
     return (
         <div className="p-6 bg-slate-200/30 rounded-3xl">
@@ -24,7 +26,9 @@ export default () => {
                             107
                         </th>
                         <th className="px-6 py-4">
-                            <button>View</button>
+                            <a href="http://localhost:4322/information">
+                                <button>View</button>
+                            </a>
                         </th>
                     </tr>
                     <tr className="bg-slate-200/30 border-b">
@@ -41,7 +45,9 @@ export default () => {
                             104
                         </th>
                         <th className="px-6 py-4">
-                            <button>View</button>
+                            <a href="http://localhost:4322/information">
+                                <button>View</button>
+                            </a>
                         </th>
                     </tr>
                     <tr className="bg-slate-100/30 border-b">
@@ -58,7 +64,9 @@ export default () => {
                             200
                         </th>
                         <th className="px-6 py-4">
-                            <button>View</button>
+                            <a href="http://localhost:4322/information">
+                                <button>View</button>
+                            </a>
                         </th>
                     </tr>
                 </tbody>
