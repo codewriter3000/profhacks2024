@@ -1,8 +1,8 @@
 export default () => {
     return (
         <div className="p-6 bg-slate-200/30 rounded-3xl">
-            <table className="table w-full text-sm text-left">
-                <thead className="text-xs bg-gray-50/30">
+            <table className="table w-full text-sm text-left border-collapse w-lg border border-slate">
+                <thead className="text-xs bg-gray-50/30 border-collapse w-auto border border-slate">
                     <th>Town</th>
                     <th>County</th>
                     <th>Population</th>
