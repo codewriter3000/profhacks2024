@@ -1,3 +1,5 @@
+//import Information from "../pages/profile/Information/information.astro"
+
 import { useRef } from 'react'
 import { cn } from '../lib/utils'
 
@@ -7,8 +9,8 @@ export default ({ className = '', county, municipalities }) => {
     
     return (
         <div className={cn("p-6 bg-slate-200/30 rounded-3xl", className)}>
-            <table className="table w-full text-sm text-left">
-                <thead className="text-xs bg-gray-50/30">
+            <table className="table w-full text-sm text-left border-collapse w-lg border border-slate">
+                <thead className="text-xs bg-gray-50/30 border-collapse w-auto border border-slate">
                     <th>Town</th>
                     <th>Actions</th>
                 </thead>
