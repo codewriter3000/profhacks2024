@@ -13,7 +13,7 @@ export default ({ className = '', county, municipalities }) => {
                     <th>Actions</th>
                 </thead>
                 <tbody>
-                    {localMunicipalities.filter(muni => muni.county_code === county).map(muni => {
+                    {municipalities.map(muni => {
                         return (
                             <tr className="bg-slate-100/30 border-b">
                                 <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
