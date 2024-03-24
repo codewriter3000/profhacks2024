@@ -1,23 +1,31 @@
-export default () => {
+import { useRef, useState } from 'react'
+import MunicipalityTable from './MunicipalityTable'
+
+export default ({ counties, municipalities }) => {
+    const county = useRef(0)
+
+    const handleCountyChange = () => {
+        console.log(county.current['value'])
+    }
+
     return (
         <div className="p-6 bg-slate-200/30 rounded-3xl">
             <h1 className="text-center text-3xl">New Jersey Shoretown Profiles</h1>
             <br></br>
-            <div class="flex">
-                <select class="text-emerald-600 p-4 flex-1 w-64 rounded-lg flex items-center justify-center bg-slate-200/30 shadow-lg" >
-                    <optgroup label="Counties">
-                        <option selected disabled>Choose a County</option>
-                        <option value="Cape May font-sans">Cape May</option>
-                    </optgroup>
-                </select>
-
-                <select class="text-emerald-600 p-4 flex-1 w-32 rounded-lg flex items-center justify-center bg-slate-200/30 shadow-lg" >
-                    <optgroup className="font-sans" label="Shore Towns">
-                        <option selected disabled> Choose a Shore Town</option>
-                        <option  value="Wildwood">Wildwood</option>
-                    </optgroup>
-                </select>
-            </div>
+            <label htmlFor="counties">Counties</label>
+            <select name="counties" className="Counties rounded-3x1" ref={county} onChange={handleCountyChange}>
+                <option value={0}>Please select an option</option>
+                    {counties.map(county => {
+                        return (
+                            <option value={county.county_code}>{county.county_name}</option>
+                        )
+                    })}
+            </select>
         </div>
+        <div className="p-6 bg-slate-200/30 rounded-3xl">
+            <h1 className="text-3xl">New Jersey Shoretown Profiles</h1>
+        </div>
+        <MunicipalityTable municipalities={municipalities} county={county} />
+    </>
     )
 }
