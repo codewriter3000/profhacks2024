@@ -1,6 +1,6 @@
 import sqlite3 from 'sqlite3'
 
-const db = await new sqlite3.Database('src/profhacks2024-db/db.sqlite', sqlite3.OPEN_READWRITE, err => {
+const db = new sqlite3.Database('src/profhacks2024-db/db.sqlite', sqlite3.OPEN_READWRITE, err => {
     if (err) {
         console.log(err.message)
     } else {
@@ -8,9 +8,9 @@ const db = await new sqlite3.Database('src/profhacks2024-db/db.sqlite', sqlite3.
     }
 })
 
-export const getCounties = () => {
+const processQuery = (query, params = []) => {
     return new Promise((resolve, reject) => {
-        db.all('SELECT * FROM nj_counties;', (err, rows) => {
+        db.all(query, params, (err, rows) => {
             if (err) {
                 reject(err);
                 return;
@@ -18,76 +18,18 @@ export const getCounties = () => {
             resolve(rows);
         });
     });
-};
-
-export const getMunicipalities = () => {
-    return new Promise((resolve, reject) => {
-        db.all('SELECT * FROM nj_municipalities;', (err, rows) => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve(rows);
-        })
-    })
 }
 
-export const getWaterQualityTestingInfo = () => {
-    return new Promise((resolve, reject) => {
-        db.all('SELECT * FROM NJDEP_Beach_Data_2024_03_23;', (err, rows) => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve(rows);
-        })
-    })
-}
+export const getCounties = () => processQuery('SELECT * FROM nj_counties;');
 
-export const getShoreTowns = () => {
-    return new Promise((resolve, reject) => {
-        db.all('SELECT DISTINCT mun.* FROM nj_municipalities AS mun INNER JOIN NJDEP_Beach_Data_2024_03_23 AS beach ON mun.municipality_code = beach.municipality_code;', (err, rows) => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve(rows);
-        })
-    })
-}
+export const getMunicipalities = () => processQuery('SELECT * FROM nj_municipalities;');
 
-export const getShoreCounties = () => {
-    return new Promise((resolve, reject) => {
-        db.all('SELECT DISTINCT cou.* FROM nj_counties AS cou INNER JOIN NJDEP_Beach_Data_2024_03_23 AS beach ON cou.county_code = beach.county_code;', (err, rows) => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve(rows);
-        })
-    })
-}
+export const getWaterQualityTestingInfo = () => processQuery('SELECT * FROM NJDEP_Beach_Data_2024_03_23;');
 
-export const getMunicipalityCode = (name) => {
-    return new Promise((resolve, reject) => {
-        db.all('SELECT * FROM nj_municipalities WHERE municipality_code = ?;', [name], (err, rows) => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve(rows);
-        })
-    })
-}
+export const getShoreTowns = () => processQuery('SELECT DISTINCT mun.* FROM nj_municipalities AS mun INNER JOIN NJDEP_Beach_Data_2024_03_23 AS beach ON mun.municipality_code = beach.municipality_code;');
 
-export const getWaterQualityTestingInfoForCode = (code) => {
-    return new Promise((resolve, reject) => {
-        db.all('SELECT * FROM NJDEP_Beach_Data_2024_03_23 WHERE municipality_code = ?;', [code], (err, rows) => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve(rows);
-        })
-    })
-}
+export const getShoreCounties = () => processQuery('SELECT DISTINCT cou.* FROM nj_counties AS cou INNER JOIN NJDEP_Beach_Data_2024_03_23 AS beach ON cou.county_code = beach.county_code;');
+
+export const getMunicipalityCode = (name) => processQuery('SELECT * FROM nj_municipalities WHERE municipality_code = ?;', [name])
+
+export const getWaterQualityTestingInfoForCode = (code) => processQuery('SELECT * FROM NJDEP_Beach_Data_2024_03_23 WHERE municipality_code = ?;', [code])

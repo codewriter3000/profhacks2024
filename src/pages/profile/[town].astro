@@ -1,5 +1,6 @@
 ---
 import Profile from '../../components/Profile';
+import MyLine from '../../components/MyLine.tsx';
 import { getShoreTowns, getWaterQualityTestingInfoForCode } from '../../lib/utils';
 const { town } = Astro.params;
 
@@ -33,7 +34,9 @@ const waterQualityInfo = await getWaterQualityTestingInfoForCode(town)
 		<meta name="generator" content={Astro.generator} />
 		<title>Profile</title>
 	</head>
-	<body class="h-screen w-screen bg-gradient-to-l from-orange-500 to-amber-400 p-6">
-		<Profile client:load waterQualityInfo={waterQualityInfo} />
+	<body class="h-screen w-screen bg-gradient-to-l from-amber-500 to-emerald-400 p-6">
+    <h1 class="text-3xl">{waterQualityInfo.municipality_name}</h1>
+    <!-- <MyLine /> -->
+		<Profile waterQualityInfo={waterQualityInfo} />
 	</body>
 </html>
